@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+E:\Dropbox\github\Beauty-of-Programming\.metadata\.plugins\org.eclipse.jdt.core
+683747716.index
+1606818066.index
+2982705214.index
+3248655537.index
