@@ -1,0 +1,22 @@
+package twodot2;
+/*
+ * 
+ */
+public class FactorialProblem {
+	
+	
+	
+	
+	public static int problem1Methos(int N){
+		int num = 0;
+		for(int i = 5 ; i <= N; i++){
+			int j  = i;
+			while(j % 5 ==0 ){
+				num ++;
+				j /= 5;
+			}
+		}
+		
+		return num;
+	}	
+}

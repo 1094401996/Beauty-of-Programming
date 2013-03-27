@@ -1,0 +1,60 @@
+package twodot2;
+/*
+ * 
+ */
+public class FactorialProblem {
+	
+	
+	public static void main(String[] args){
+		int N = 10;
+		System.out.println(problem1Method2(N));
+	}
+	
+	
+	
+	
+	public static int problem1Method1(int N){
+		int num = 0;
+		for(int i = 5 ; i <= N; i++){
+			int j  = i;
+			while(j % 5 ==0 ){
+				num ++;
+				j /= 5;
+			}
+		}
+		
+		return num;
+	}	
+	
+	
+	public static int problem1Method2(int N){
+		int num = 0;
+		//同样的思想， 不同的实现方式。。。。
+//		while(N != 0){
+//			num += N/5;
+//			N/=5;
+//			
+//		}
+		int k = 5;
+		while(k <= N){
+			num += N / 5;
+			k *= 5;
+		}
+		return num;
+	}
+	
+	
+	public static int problem2Method1(int N){
+		int num = 0;
+		int k = 2;
+		while(k <= N){
+			N >>= 1;
+			num += N;
+			k <<= 1;
+		}
+		
+		return num;
+	}
+	
+	//N!含有的质因数2的个数 = N - （N的二进制表示中1的数目）
+}

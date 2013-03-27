@@ -1,0 +1,34 @@
+package twodot3;
+
+public class FindFloodKing {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public static int findtheOne(int [] data){
+		int count = 0;
+		int theone = 0;
+		for(int i = 0 ; i <data.length; i++){
+			if(count == 0){
+				theone = data[i];
+				count ++;
+			}
+			
+			if(data[i] == theone){
+				count ++;
+			}
+			if(data[i] != theone){
+				count --;
+			}
+		}
+		return theone;
+	}
+	
+	
+
+}
