@@ -1,0 +1,63 @@
+package twodot5;
+
+public class FindKth {
+
+	/**
+	 * @param args
+	 */ 
+	public static void main(String[] args) {
+		int [] arr = {10,3,4,5,1,2,8,7,9,6,0};
+		int k = 3;
+		System.out.println(arr[findKth1(arr,k)]);
+	}
+	public static int findKth1(int[] arr, int k ){
+		int max = findMax(arr);
+		int min = findMin(arr);
+		int mid = Integer.MAX_VALUE;
+		while(max - min > 0.5){
+			mid = (max + min) /2;
+			if(find(arr, mid) > k)
+				min = mid;
+			else
+				max = mid;
+		}
+		System.out.println("max: " + max +" min: " + min);
+		int kthindex = 0;
+		for (int i = 0 ; i < arr.length; i++){
+			if(arr[i] >= min && arr[i] <= max){
+				kthindex = i;
+				break;
+			}
+		}
+		return kthindex;
+	}
+	
+	private static int find(int [] arr, int num){
+		int N = 0;
+		for(int i = 0 ; i < arr.length; i++) {
+			if(arr[i] >= num){
+				N++;
+			}
+		}
+		return N;
+	}
+	private static int findMax(int[] arr){
+		int maxIndex = 0;
+		for(int i = 0 ; i < arr.length; i++){
+			if(arr[i] > arr[maxIndex])
+				maxIndex = i;
+		}
+		return arr[maxIndex];
+		
+	}
+	private static int findMin(int[] arr){
+		int minIndex = 0;
+		for(int i = 0 ; i < arr.length; i++){
+			if(arr[i] < arr[minIndex]){
+				minIndex = i;
+			}
+		}
+		return arr[minIndex];
+	}
+
+}

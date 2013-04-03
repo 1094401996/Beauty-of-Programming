@@ -1,0 +1,108 @@
+package twodot5;
+/**
+ * find the kth largest number in two sorted arrays
+ * method:
+ * 在两个有序数组中进行二分搜索：时间复杂度为O（logn+logm）
+ * 先比较两个数组k/2的元素，如果相等，返回
+ * 否则较大的那个索引减去k/4，较小的那个索引加上k/4，继续比较。
+ * 这样不停二分下去，直至两边相等或索引达到了边界（0或k）。
+ * @author gengchen
+ * 
+ * http://blog.csdn.net/fangkyo/article/details/8114784
+ *
+ */
+public class extension {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[]a = {1,3,5,7};
+		int[] b ={2,4,4,8};
+		int k = 5;
+		for (int i = 1; i <= a.length + b.length; i++)
+			System.out.print(findKth2(a,0,a.length - 1, b, 0 ,b.length - 1, i) +" ");
+	}
+	
+	//time complexity: O(M + N)
+	private static int findKth1(int[] a, int[] b, int k){
+		int i = a.length - 1;
+		int j = b.length - 1;
+		int count = 0;
+		int target = 0;
+		while(i >= 0 && j >= 0){
+			if(a[i] > b[j]){
+				target = 0;
+			}
+			if(a[i] <= b[j]){
+				target = 1;
+			}
+			count ++;
+			if(count == k){
+				break;
+			}
+			if(target == 0){
+				i--;
+			}else{
+				j--;
+			}
+		}
+		if(target == 0 ){
+			return a[i];
+		}else{
+			return b[j];
+		}
+	}
+	
+	public static int findKth2(int[] A, int aBeg, int aEnd, int[] B, int bBeg, int bEnd ,int k ){
+		if (aBeg > aEnd)  
+	    {  
+	        return B[bBeg + k - 1];  
+	    }  
+	    if (bBeg > bEnd)  
+	    {  
+	        return A[aBeg + k - 1];  
+	    }  
+	      
+	    //取中间位置  
+	    int aMid = aBeg + (aEnd - aBeg)/2;    
+	    int bMid = bBeg + (bEnd - bBeg)/2;  
+	      
+	    //从A和B的开始位置到两个数组中间位置的元素个数  
+	    int halfLen = aEnd - aMid + bEnd - bMid + 2;  
+	      
+	    if (A[aMid] < B[bMid])  
+	    {  
+	        if (halfLen > k)  
+	        {  
+	            // 此时在合并的数组中A[aBeg...aMid]和元素一定在B[bMid]的左侧，  
+	            // 即此时第k大的元素一定比A[aMid]这个元素大（严格来说不小于）  
+	            // 故以后没有必要搜索 A[aBeg...aMid]这些元素  
+	            return findKth2(A, aMid + 1, aEnd, B, bBeg, bEnd, k);  
+	        }  
+	        else  
+	        {  
+	            // 此时在合并的数组中A[aBeg...aMid]元素一定在B[bMid]的左侧，  
+	            // 所以前K个元素中一定包含B[bMid...bEnd]（可以使用反证法来证明这点）。  
+	            // 但是无法判断A[aBeg...aEnd]与B[bBeg...bMid]之间的关系，帮需要对他们进行判断  
+	            // 此时K就剩下除去A[aBeg...aMid]这些元素，个数为k - (aMid - aBeg + 1)  
+	            return  findKth2(A, aBeg, aEnd, B, bBeg, bMid -1 , k - (bEnd - bMid + 1));  
+	        }  
+	    }  
+	    else  
+	    {  
+	        //注释与上面相似  
+	        if (halfLen > k)  
+	        {  
+	            return findKth2(A, aBeg, aEnd, B, bMid + 1, bEnd, k);  
+	        }  
+	        else  
+	        {  
+	            return  findKth2(A, aBeg, bMid - 1, B, bBeg, bEnd, k - (aEnd - aMid + 1));  
+	        }  
+	    }  
+	}
+	
+	
+}
